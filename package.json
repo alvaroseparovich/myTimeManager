@@ -1,0 +1,26 @@
+{
+  "name": "mytimemanager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alvaroseparovich/myTimeManager.git"
+  },
+  "keywords": [
+    "time",
+    "manager"
+  ],
+  "author": "Alvaro Separovich",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alvaroseparovich/myTimeManager/issues"
+  },
+  "homepage": "https://github.com/alvaroseparovich/myTimeManager#readme",
+  "engine": {
+    
+  }
+}
