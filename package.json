@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "python3 -m http.server 8000"
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,9 @@
   },
   "homepage": "https://github.com/alvaroseparovich/myTimeManager#readme",
   "engine": {
-    
+    "node": ">= 21.0.0"
+  },
+  "dependencies": {
+    "uuid": "^9.0.1"
   }
 }

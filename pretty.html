@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="index.mjs" type="module"></script>
+</head>
+<body>
+  <div class="week-calendar">
+    <span class="day-of-week-1 dow"> <span class="current-time"> </span></span>
+    <span class="day-of-week-2 dow"> <span class="task-time-box start-at- ends-at- "></span> </span>
+    <span class="day-of-week-3 dow"></span>
+    <span class="day-of-week-4 dow"></span>
+    <span class="day-of-week-5 dow"></span>
+    <span class="day-of-week-6 dow"></span>
+    <span class="day-of-week-7 dow"></span>
+  </div>
+</body>
+<style>
+  .week-calendar {
+    display: block;
+    /* width: 100%; */
+    background-color: rgb(232, 252, 255);
+    flex-direction: row;
+  }
+  .dow{
+    border: 1px solid #5c84b3;
+    display: inline-block;
+    margin: 0;
+    height: 20em;
+    width: 13vw;
+    border-radius: 0.4em;
+    background-color: rgb(219, 244, 248);
+
+  }
+  .current-time {
+    display: block;
+    position: relative;
+    height: 0.1em;
+    background-color: rgb(255, 187, 0);
+    top: 1%;
+    
+    /* bottom: 50%; */
+    /* width: 2em; */
+  }
+  .task-time-box {
+    display: block;
+    /* width: 2em; */
+    height: 2em;
+    background-color: #0f0;
+    border-radius: 0.4em;
+
+  }
+</style>
+</html>

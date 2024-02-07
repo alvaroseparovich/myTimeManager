@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>My Task Manager</h1>
+  
+  <form action="" method="post" class="project">
+    <fieldset>
+      <input type="text" name="projectName" id="projectName">
+      <input type="submit" value="Submit">
+    </fieldset>
+  </form>
+  
+  <form action="" method="post" class="project-selected">
+    <fieldset>
+      <select name="cars" id="cars">
+        <option value="selecione">Selecione</option>
+      </select>
+    </fieldset>
+  </form>
+  
+  <button type="button" class="start">Start</button>
+  <button type="button" class="end">Stop</button>
+  
+  <h2>
+    <span class="timer">00:00:00</span>
+  </h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>project</th>
+        <th>task</th>
+        <th>user</th>
+        <th>duration</th>
+        <th>started at</th>
+        <th>ended at</th>
+      </tr>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>project 1</td>
+          <td>task 1</td>
+          <td>user 1</td>
+          <td>1</td>
+          <td>2020-01-01 00:00:00</td>
+          <td>2020-01-01 00:00:01</td>
+        </tr>
+      </tbody>
+    </thead>
+  </table>
+</body>
+<script>
+const projectSelected = document.querySelector('.project-selected')
+const project = document.querySelector('.project')
+
+project.addEventListener('submit', (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+  console.log(e.target.projectName.value)
+  const option = document.createElement('option')
+  option.value = e.target.projectName.value
+  option.textContent = e.target.projectName.value
+  projectSelected.cars.appendChild(option)
+  projectSelected.cars.value = option.value
+  e.target.projectName.value = ''
+});
+
+const startButton = document.querySelector('.start')
+const endButton = document.querySelector('.end')
+
+function nullTimerController (project, task, user) {
+  return JSON.parse(JSON.stringify({
+    project: project || 'default',
+    task: task || 'default',
+    user: user || 'eu',
+    duration: '',
+    startedAt: '',
+    endedAt: ''
+  }))
+} 
+let currentTimerController
+let interval
+
+startButton.addEventListener('click', (e) => {
+  console.log('start')
+  const currentProjectSelected = document.querySelector('.project-selected').cars.value
+  const timer = document.querySelector('.timer')
+
+  currentTimerController = nullTimerController(currentProjectSelected, 'default', 'eu')
+  currentTimerController.startedAt = new Date()
+  interval = setInterval(() => {
+    const timerNow = new Date(new Date() - currentTimerController.startedAt)
+    // console.log(timerNow.getUTCDate() - 1, timerNow.getUTCHours(), timerNow.getUTCMinutes(), timerNow.getUTCSeconds())
+    timer.textContent = `${(timerNow.getUTCDate() - 1) || ''} ${timerNow.getUTCHours()}h:${timerNow.getUTCMinutes()}m:${timerNow.getUTCSeconds()}s`
+  }, 100)
+})
+
+endButton.addEventListener('click', (e) => {
+    console.log('end')
+    clearInterval(interval)
+    console.log(interval)
+
+    currentTimerController.endedAt = new Date()
+    currentTimerController.duration = currentTimerController.endedAt - currentTimerController.startedAt
+
+    const tbody = document.querySelector('tbody')
+    const tbodyTrLength = tbody.children.length
+
+
+
+    const tr = document.createElement('tr')
+    const tdId = document.createElement('td')
+    const tdProject = document.createElement('td')
+    const tdTask = document.createElement('td')
+    const tdUser = document.createElement('td')
+    const tdDuration = document.createElement('td')
+    const tdStartedAt = document.createElement('td')
+    const tdEndedAt = document.createElement('td')
+    tdId.textContent = tbodyTrLength + 1
+    tdProject.textContent = currentTimerController.project
+    tdTask.textContent = currentTimerController.task
+    tdUser.textContent = currentTimerController.user
+    tdDuration.textContent = currentTimerController.duration
+    tdStartedAt.textContent = currentTimerController.startedAt.toISOString()
+    tdEndedAt.textContent = currentTimerController.endedAt.toISOString()
+    
+    tr.appendChild(tdId)
+    tr.appendChild(tdProject)
+    tr.appendChild(tdTask)
+    tr.appendChild(tdUser)
+    tr.appendChild(tdDuration)
+    tr.appendChild(tdStartedAt)
+    tr.appendChild(tdEndedAt)
+
+    tbody.appendChild(tr)
+
+    currentTimerController = nullTimerController()
+  })
+</script>
+<style>
+  td{
+    border: 1px solid #000;
+  }
+</style>
+</html>
